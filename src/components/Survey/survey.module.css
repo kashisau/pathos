@@ -1,0 +1,75 @@
+.survey {
+  margin: 2rem 0;
+}
+.divider {
+  background-image: url('../../img/survey-background.svg');
+  background-size: 111%;
+  height: 4rem;
+  border: 0 none;
+  margin: 0 -1.75rem;
+  padding: 1.75rem;
+}
+.content {
+  background-color: #fcfcfc;
+  margin: -4rem -1.75rem 0;
+  padding: 0 1.75rem 1.75rem;
+}
+
+.closedQuestion {
+  display: block;
+  margin: 0.75em 0;
+}
+
+.closedAnswer {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  width: 1.75rem;
+  height: 1.75rem;
+  margin: 0.25em 0.5em 0.25em 0;
+
+  border: 2px solid #707070;
+  border-radius: 100%;
+  vertical-align: middle;
+
+  position: relative;
+}
+
+.closedAnswer:checked::before {
+  position: absolute;
+  background-color: #2A2C2B;
+  left: 0.25em;
+  right: 0.25em;
+  top: 0.25em;
+  bottom: 0.25em;
+  border-radius: 100%;
+  content: " ";
+}
+
+.monthsRange,
+.monthsText {
+  display: inline-block;
+  padding: 0;
+  vertical-align: middle;
+}
+.monthsRange {
+  width: 70%;
+  margin: 1em 0;
+}
+
+.monthsText {
+  width: 30%;
+  margin: 0;
+  line-height: 1;
+  text-align: center;
+}
+
+.monthsValue,
+.monthsUnit {
+  display: block;
+}
+
+.monthsValue {
+  font-size: 2em;
+}

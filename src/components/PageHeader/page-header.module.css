@@ -1,0 +1,10 @@
+.header {
+  height: 4.875em;
+    background-image: url(../../img/header-background.svg);
+    background-size: cover;
+    background-position: bottom center;
+}
+.logotype {
+  height: 3em;
+  margin: 0.5em 1.75em;
+}
