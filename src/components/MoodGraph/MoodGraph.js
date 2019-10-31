@@ -23,7 +23,6 @@ const MoodGraph = ({ dataPoints = 12, months, setMonths }) => {
   }
 
   const updateGraphSize = () => {
-    console.log("Updating dimensions...")
     if (graphSpace.current) {
       const firstSlider = sliderRefs[0].current
       const lastSlider = sliderRefs[sliders.length - 1].current

@@ -1,5 +1,5 @@
 .survey {
-  margin: 2rem 0;
+  margin: 2rem 0 0;
 }
 .divider {
   background-image: url('../../img/survey-background.svg');
@@ -47,6 +47,11 @@
   content: " ";
 }
 
+.closedAnswer[type="checkbox"],
+.closedAnswer[type="checkbox"]:checked::before {
+  border-radius: 0;
+}
+
 .monthsRange,
 .monthsText {
   display: inline-block;
@@ -72,4 +77,17 @@
 
 .monthsValue {
   font-size: 2em;
+}
+
+.submitBtn {
+  -webkit-appearance: none;
+  width: 100%;
+  font-size: 2em;
+  font-weight: bold;
+  padding: 0.5em 2em;
+  background: #0E3B80;
+  color: white;
+  border-radius: 1em;
+
+  margin: 0 0 1em 0;
 }

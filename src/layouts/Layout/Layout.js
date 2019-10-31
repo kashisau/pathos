@@ -6,7 +6,11 @@ const Layout = ({children}) =>
   <>
     <PageHeader />
     <main className={styles.body}>{children}</main>
-    <footer></footer>
+    <footer className={styles.footer}>
+      <div className={styles.credits}>
+        <p>See source code on GitHub.com</p>
+      </div>
+    </footer>
   </>
 
 export default Layout

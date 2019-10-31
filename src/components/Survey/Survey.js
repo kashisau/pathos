@@ -25,7 +25,11 @@ const Survey = () => {
           </label>
           <label className={styles.closedQuestion}>
             <input className={styles.closedAnswer} type="radio" name="onAssignment" value="Alumni" />
-            No, I've completed my assignment
+            No, I've completed mine
+          </label>
+          <label className={styles.closedQuestion}>
+            <input className={styles.closedAnswer} type="radio" name="onAssignment" value="Alumni" />
+            No, I was a volunteer partner
           </label>
       </Question>
       <Question
@@ -48,6 +52,68 @@ const Survey = () => {
           setMonths={setMonths}
           />
       </Question>
+      <Question
+        headingText="Positive effects"
+        questionText="What has had the biggest positive effects on your mood during your assignment? (Select all that apply)">
+          <label className={styles.closedQuestion}>
+            <input className={styles.closedAnswer} type="checkbox" name="moodPositives" />
+            Holidays / travel
+          </label>
+          <label className={styles.closedQuestion}>
+            <input className={styles.closedAnswer} type="checkbox" name="moodPositives" />
+            Social activities
+          </label>
+          <label className={styles.closedQuestion}>
+            <input className={styles.closedAnswer} type="checkbox" name="moodPositives" />
+            Assignment progress
+          </label>
+          <label className={styles.closedQuestion}>
+            <input className={styles.closedAnswer} type="checkbox" name="moodPositives" />
+            Time off work
+          </label>
+          <label className={styles.closedQuestion}>
+            <input className={styles.closedAnswer} type="checkbox" name="moodPositives" />
+            Establishing a routine
+          </label>
+          <label className={styles.closedQuestion}>
+            <input className={styles.closedAnswer} type="checkbox" name="moodPositives" />
+            Colleagues within the PO
+          </label>
+          <label className={styles.closedQuestion}>
+            <input className={styles.closedAnswer} type="checkbox" name="moodPositives" />
+            Other
+          </label>
+      </Question>
+      <Question
+        headingText="Negative effects"
+        questionText="What has had the biggest negative effects on your mood during your assignment? (Select all that apply)">
+          <label className={styles.closedQuestion}>
+            <input className={styles.closedAnswer} type="checkbox" name="moodNegatives" />
+            Workload
+          </label>
+          <label className={styles.closedQuestion}>
+            <input className={styles.closedAnswer} type="checkbox" name="moodNegatives" />
+            Progress (or lack thereof)
+          </label>
+          <label className={styles.closedQuestion}>
+            <input className={styles.closedAnswer} type="checkbox" name="moodNegatives" />
+            Isolation
+          </label>
+          <label className={styles.closedQuestion}>
+            <input className={styles.closedAnswer} type="checkbox" name="moodNegatives" />
+            Colleagues within the PO
+          </label>
+          <label className={styles.closedQuestion}>
+            <input className={styles.closedAnswer} type="checkbox" name="moodNegatives" />
+            Unrealistic assignment goals
+          </label>
+          <label className={styles.closedQuestion}>
+            <input className={styles.closedAnswer} type="checkbox" name="moodNegatives" />
+            Other
+          </label>
+      </Question>
+      <input className={styles.submitBtn} type="submit" />
+      <p>Your specific responses will not be shared in our presentation, and this information will not be shared with anyone outside AVP.</p>
     </div>
   </section>)
 }

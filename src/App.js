@@ -5,7 +5,7 @@ import Survey from './components/Survey'
 
 const App = () =>
   <Layout>
-    <Intro participantName="Kashi Samaraweera" />
+    <Intro participantName="Kashi" />
     <Survey />
   </Layout>
 
