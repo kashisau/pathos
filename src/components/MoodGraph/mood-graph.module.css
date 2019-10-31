@@ -84,7 +84,6 @@
 }
 
 .graphSpace {
-  background-color: red;
   grid-row: 1 / 4;
   grid-column: 2 / 3;
 
@@ -92,4 +91,8 @@
   user-select: none;
 
   overflow: hidden;
+
+  display: grid;
+  align-content: center;
+  justify-content: center;
 }
