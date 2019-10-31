@@ -1,10 +1,14 @@
 .moodGraph {
   background-color: #0E3B80;
   min-height: 12.5rem;
-  border-radius: 1rem;
   display: grid;
   grid-template-rows: 1fr 1px 1fr;
   grid-template-columns: auto 1fr;
+
+  margin: 0 -2em 0 -2em;
+  padding: 1em 2em 1em 0.25em;
+
+  position: relative;
 }
 
 .axisLabels {
@@ -46,6 +50,9 @@
   grid-template-rows: 1fr;
   grid-row: 1 / 4;
   grid-column: 2 / 3;
+
+  position: relative;
+  z-index: 2;
 }
 
 .graphRangeDiv {
@@ -126,4 +133,16 @@
 }
 .graphRange:focus::-ms-fill-upper {
   background: rgba(77, 81, 79, 0.5);
+}
+
+.graphSpace {
+  background-color: red;
+  position: absolute;
+  left: 2.5em;
+  right: 2em;
+  bottom: 1em;
+  top: 1em;
+
+  z-index: 1;
+  display: none;
 }

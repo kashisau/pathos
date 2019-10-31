@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Question from '../Question'
 
 import styles from './survey.module.css'
@@ -6,7 +6,8 @@ import rangeStyles from './range.module.css'
 import MoodGraph from '../MoodGraph/MoodGraph'
 
 const Survey = () => {
-  const [duration, updateDuration] = useState(1)
+  const [duration, setDuration] = useState(1)
+  const [months, setMonths] = useState([0, 0, 0, 0 ,0, 0, 0, 0, 0, 0, 0, 0])
 
   return (<section className={styles.survey}>
     <hr className={styles.divider} />
@@ -31,7 +32,7 @@ const Survey = () => {
         headingText="Time on assignment"
         questionText="How long have you been on assignment in-country?">
           <label>
-            <input className={[styles.monthsRange, rangeStyles.range].join(" ")} type="range" min="1" max="12" onChange={(e) => updateDuration(e.currentTarget.value)} value={duration} />
+            <input className={[styles.monthsRange, rangeStyles.range].join(" ")} type="range" min="1" max="12" onChange={(e) => setDuration(e.currentTarget.value)} value={duration} />
             <div className={styles.monthsText}>
               <span className={styles.monthsValue}>{duration}</span>
               <span className={styles.monthsUnit}>months</span>
@@ -41,7 +42,11 @@ const Survey = () => {
       <Question
         headingText="Mood"
         questionText="Fill out the mood graph below by sliding each point up or down to reflect your mood during that time.">
-        <MoodGraph dataPoints={duration} />
+        <MoodGraph
+          dataPoints={duration}
+          months={months}
+          setMonths={setMonths}
+          />
       </Question>
     </div>
   </section>)
