@@ -6,8 +6,8 @@ import rangeStyles from './range.module.css'
 import MoodGraph from '../MoodGraph/MoodGraph'
 
 const Survey = () => {
-  const [duration, setDuration] = useState(1)
-  const [months, setMonths] = useState([0, 0, 0, 0 ,0, 0, 0, 0, 0, 0, 0, 0])
+  const [duration, setDuration] = useState(6)
+  const [months, setMonths] = useState([0, 0, 0, 0, 0 ,0, 0, 0, 0, 0, 0, 0, 0])
 
   return (<section className={styles.survey}>
     <hr className={styles.divider} />
@@ -39,13 +39,14 @@ const Survey = () => {
             <input className={[styles.monthsRange, rangeStyles.range].join(" ")} type="range" min="1" max="12" onChange={(e) => setDuration(e.currentTarget.value)} value={duration} />
             <div className={styles.monthsText}>
               <span className={styles.monthsValue}>{duration}</span>
-              <span className={styles.monthsUnit}>months</span>
+              <span className={styles.monthsUnit}>{duration === 1? 'month' : 'months'}</span>
             </div>
           </label>
       </Question>
       <Question
         headingText="Mood"
-        questionText="Fill out the mood graph below by sliding each point up or down to reflect your mood during that time.">
+        questionText="Fill out the mood graph below by sliding each point up or down to reflect your mood during that time."
+        className={styles.moodGraphQuestion}>
         <MoodGraph
           dataPoints={duration}
           months={months}

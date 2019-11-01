@@ -1,8 +1,8 @@
 .header {
-  height: 4.875em;
-    background-image: url(../../img/header-background.svg);
-    background-size: cover;
-    background-position: bottom center;
+  background-image: url(/static/media/header-background.1556f3de.svg);
+  background-size: 125%;
+  background-position: bottom center;
+  height: 5.875em;
 }
 .logotype {
   height: 3em;

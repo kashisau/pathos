@@ -4,7 +4,8 @@
 .divider {
   background-image: url('../../img/survey-background.svg');
   background-size: 111%;
-  height: 4rem;
+  background-position: top center;
+  height: 20vw;
   border: 0 none;
   margin: 0 -1.75rem;
   padding: 1.75rem;
@@ -13,6 +14,27 @@
   background-color: #fcfcfc;
   margin: -4rem -1.75rem 0;
   padding: 0 1.75rem 1.75rem;
+
+  display: grid;
+}
+
+@media (min-width: 768px) {
+  .content {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 2em;
+    column-gap: 2em;
+  }
+}
+
+@media (min-width: 1280px) {
+  .content {
+    grid-template-columns: repeat(2, 1fr);
+    padding-left: 10vw;
+    padding-right: 10vw;
+    padding: 0 10vw 4em;
+    row-gap: 2em;
+    column-gap: 2em;
+  }
 }
 
 .closedQuestion {
@@ -77,6 +99,12 @@
 
 .monthsValue {
   font-size: 2em;
+}
+
+@media (min-width: 768px) {
+  .moodGraphQuestion {
+    grid-column: 1 / 3;
+  }
 }
 
 .submitBtn {

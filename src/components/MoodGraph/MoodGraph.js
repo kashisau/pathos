@@ -70,7 +70,7 @@ const MoodGraph = ({ dataPoints = 12, months, setMonths }) => {
       <div className={styles.axisLabels}>
         <span className={styles.axisLabel} role="img" aria-label="Estatic">😆</span>
         <span className={styles.axisLabel} role="img" aria-label="Happy">🙂</span>
-        <span className={styles.axisLabel} role="img" aria-label="Underwhelmed">😐</span>
+        <span className={styles.axisLabel} role="img" aria-label="Neutral">😐</span>
         <span className={styles.axisLabel} role="img" aria-label="Unhappy">😓</span>
         <span className={styles.axisLabel} role="img" aria-label="Dire">😖</span>
       </div>
