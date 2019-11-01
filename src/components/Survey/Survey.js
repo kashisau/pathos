@@ -13,8 +13,8 @@ const Survey = () => {
     <hr className={styles.divider} />
     <div className={styles.content}>
       <Question
-        headingText="Let's begin"
-        questionText="Are you currently on assignment?">
+        headingText="Let's begin">
+          <p className={styles.questionText}>Are you currently on assignment?</p>
           <label className={styles.closedQuestion}>
             <input className={styles.closedAnswer} type="radio" name="onAssignment" value="Yes" />
             Yes
@@ -33,8 +33,8 @@ const Survey = () => {
           </label>
       </Question>
       <Question
-        headingText="Time on assignment"
-        questionText="How long have you been on assignment in-country?">
+        headingText="Time on assignment">
+          <p className={styles.questionText}>How long have you been on assignment in-country?</p>
           <label>
             <input className={[styles.monthsRange, rangeStyles.range].join(" ")} type="range" min="1" max="12" onChange={(e) => setDuration(e.currentTarget.value)} value={duration} />
             <div className={styles.monthsText}>
@@ -45,8 +45,8 @@ const Survey = () => {
       </Question>
       <Question
         headingText="Mood"
-        questionText="Fill out the mood graph below by sliding each point up or down to reflect your mood during that time."
         className={styles.moodGraphQuestion}>
+        <p className={styles.questionText}>Fill out the mood graph below by sliding each point up or down to reflect your mood during that time.</p>
         <MoodGraph
           dataPoints={duration}
           months={months}
@@ -54,8 +54,8 @@ const Survey = () => {
           />
       </Question>
       <Question
-        headingText="Positive effects"
-        questionText="What has had the biggest positive effects on your mood during your assignment? (Select all that apply)">
+        headingText="Positive effects">
+        <p className={styles.questionText}>What has had the biggest <u>positive</u> effects on your mood during your assignment?<br />(Select all that apply)</p>
           <label className={styles.closedQuestion}>
             <input className={styles.closedAnswer} type="checkbox" name="moodPositives" />
             Holidays / travel
@@ -86,8 +86,8 @@ const Survey = () => {
           </label>
       </Question>
       <Question
-        headingText="Negative effects"
-        questionText="What has had the biggest negative effects on your mood during your assignment? (Select all that apply)">
+        headingText="Negative effects">
+        <p className={styles.questionText}>What has had the biggest <u>negative</u> effects on your mood during your assignment?<br />(Select all that apply)</p>
           <label className={styles.closedQuestion}>
             <input className={styles.closedAnswer} type="checkbox" name="moodNegatives" />
             Workload

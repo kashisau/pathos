@@ -37,6 +37,10 @@
   }
 }
 
+.questionText {
+  font-weight: bold;
+}
+
 .closedQuestion {
   display: block;
   margin: 0.75em 0;
