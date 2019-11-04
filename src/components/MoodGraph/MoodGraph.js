@@ -7,7 +7,7 @@ import { getMonth } from '../../helpers/Constants/Constants'
 
 const NODE_SCALER = 116
 
-const MoodGraph = ({ dataPoints = 12, months, setMonths, startMonth }) => {
+const MoodGraph = ({ dataPoints = 12, months, setMonths, startMonth, submitState }) => {
   const sliders = []
   const graphSpace = useRef()
   const sliderRefs = [useRef(), useRef(), useRef(), useRef(),
@@ -56,6 +56,7 @@ const MoodGraph = ({ dataPoints = 12, months, setMonths, startMonth }) => {
         bounds="parent"
         onDrag={updateMonths}
         defaultPosition={ {x: 0, y: months[i]*-NODE_SCALER} }
+        disabled={submitState}
         key={i}>
       <div className={styles.monthNode} data-month={i} ref={sliderRefs[i]} style={{
           gridColumn: `${i+1} / ${i+2}`

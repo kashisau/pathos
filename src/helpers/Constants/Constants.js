@@ -6,3 +6,23 @@ export const getMonth = (index, offset = 0) => {
   const monthsModulo = ((monthIndex%monthsCount)+monthsCount)%monthsCount
   return MONTH_NAMES[monthsModulo]
 }
+
+export const MOOD_POSITIVES = [
+  "Colleagues within the PO",
+  "Assignment progress",
+  "Social activities outside work",
+  "Establishing a routine",
+  "Time off work",
+  "Holidays / travel",
+  "Other"
+]
+
+export const MOOD_NEGATIVES = [
+  "Too much work",
+  "Too little work",
+  "Progress (or lack thereof)",
+  "Isolation",
+  "Colleagues within the PO",
+  "Unrealistic assignment goals",
+  "Other"
+]
