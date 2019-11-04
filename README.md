@@ -1,4 +1,4 @@
-# ![Pathos](src/img/pathos-logo@2x.png)
+# ![Pathos](public/Logo-transparent-dark.png)
 ## _Collects mood data for volunteers in the field_
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/66a7f8d8-8f29-4e31-a4ec-b7d84aed5385/deploy-status)](https://app.netlify.com/sites/feels/deploys)
