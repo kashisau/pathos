@@ -135,6 +135,7 @@ const Survey = () => {
       name="pathos"
       method="post"
       action="/submit"
+      netlify
       data-netlify="true"
       data-netlify-honeypot="bot-field"
       onSubmit={e => processSubmission(e)}>
