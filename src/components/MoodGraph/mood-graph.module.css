@@ -9,9 +9,11 @@
 
   position: relative;
   user-select: none;
+
+  margin: 0 0 6em 0;
 }
 
-.axisLabels {
+.yAxisLabels {
   grid-column: 1 / 2;
   grid-row: 1 / 4;
 
@@ -27,11 +29,47 @@
   user-select: none;
 }
 
-.axisLabel {
+.yAxisLabel {
   font-size: 1.25em;
   margin: 0 0.25em;
   text-align: center;
   user-select: none;
+}
+
+.xAxisLabels {
+  overflow: visible;
+  grid-row: 4 / 5;
+  grid-column: 2 / 3;
+  display: grid;
+  justify-items: center;
+}
+
+.xAxisLabel {
+  transform: rotate(295deg);
+  display: inline-block;
+  height: 0;
+  overflow: visible;
+  width: 1em;
+  text-align: right;
+  position: relative;
+  top: 1.25em;
+  left: -1em;
+}
+
+.xAxisLabelPreDeparture {
+  line-height: 1;
+  transform: rotate(270deg);
+  left: -1em;
+  top: 1em;
+}
+
+.preDepartureBlock {
+  float: right;
+  display: inline-block;
+}
+
+.xAxisLabelFirstMonth {
+  font-weight: bold;
 }
 
 .baseLine {
@@ -66,12 +104,16 @@
   height: 2em;
   display: grid;
 
+  grid-row: 1 / 2;
+
   justify-items: center;
   align-content: center;
   
   position: relative;
   top: 7.25em;
   user-select: none;
+
+  z-index: 3;
 }
 
 .monthNodeCircle {
@@ -81,6 +123,21 @@
   border-radius: 100%;
   box-shadow: 2px 2px 6px rgba(0,0,0,0.45);
   user-select: none;
+}
+
+.preDeparture {
+  grid-row: 1 / 3;
+  grid-column: 1 / 2;
+  background-color: #f5cf5e40;
+  width: 100%;
+  height: calc(100% + 6em);
+}
+
+.onAssignment {
+  grid-row: 2 / 3;
+  background-color: #d25ef540;
+  width: 100%;
+  height: calc(100% + 3em);
 }
 
 .graphSpace {

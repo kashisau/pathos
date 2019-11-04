@@ -3,14 +3,16 @@ import styles from './mood-graph.module.css'
 import Draggable from 'react-draggable'
 import Trend from '../react-trend'
 
+import { MONTH_NAMES, getMonth } from '../../helpers/Constants/Constants'
+
 const NODE_SCALER = 116
 
-const MoodGraph = ({ dataPoints = 12, months, setMonths }) => {
+const MoodGraph = ({ dataPoints = 12, months, setMonths, startMonth }) => {
   const sliders = []
   const graphSpace = useRef()
   const sliderRefs = [useRef(), useRef(), useRef(), useRef(),
                       useRef(), useRef(), useRef(), useRef(),
-                      useRef(), useRef(), useRef(), useRef()]
+                      useRef(), useRef(), useRef(), useRef(), useRef()]
 
   const [graphDimensions, setGraphDimensions] = useState({ width:0, height: 0 })
 
@@ -54,12 +56,29 @@ const MoodGraph = ({ dataPoints = 12, months, setMonths }) => {
         bounds="parent"
         onDrag={updateMonths}
         defaultPosition={ {x: 0, y: months[i]*-NODE_SCALER} }
-        key={i}
-        >
-      <div className={styles.monthNode} data-month={i} ref={sliderRefs[i]}>
+        key={i}>
+      <div className={styles.monthNode} data-month={i} ref={sliderRefs[i]} style={{
+          gridColumn: `${i+1} / ${i+2}`
+        }}>
         <div className={styles.monthNodeCircle} />
       </div>
       </Draggable>)
+  }
+
+  const xAxisLabels = () => {
+    const labels = []
+    for (let i = 0; i < dataPoints - 1; i++) {
+      labels.push(
+        <span
+          className={
+            [
+              styles.xAxisLabel,
+              i === 0? styles.xAxisLabelFirstMonth : ''
+            ].join(" ")}
+          key={i}>{getMonth(i + startMonth).substr(0, 3)}</span>
+      )
+    }
+    return labels
   }
 
   const graphData = [...months]
@@ -67,12 +86,23 @@ const MoodGraph = ({ dataPoints = 12, months, setMonths }) => {
 
   return (
     <div className={styles.moodGraph}>
-      <div className={styles.axisLabels}>
-        <span className={styles.axisLabel} role="img" aria-label="Estatic">😆</span>
-        <span className={styles.axisLabel} role="img" aria-label="Happy">🙂</span>
-        <span className={styles.axisLabel} role="img" aria-label="Neutral">😐</span>
-        <span className={styles.axisLabel} role="img" aria-label="Unhappy">😓</span>
-        <span className={styles.axisLabel} role="img" aria-label="Dire">😖</span>
+      <div className={styles.yAxisLabels}>
+        <span className={styles.yAxisLabel} role="img" aria-label="Estatic">😆</span>
+        <span className={styles.yAxisLabel} role="img" aria-label="Happy">🙂</span>
+        <span className={styles.yAxisLabel} role="img" aria-label="Neutral">😐</span>
+        <span className={styles.yAxisLabel} role="img" aria-label="Unhappy">😓</span>
+        <span className={styles.yAxisLabel} role="img" aria-label="Dire">😖</span>
+      </div>
+      <div className={styles.xAxisLabels} style={{
+          gridTemplateColumns: `repeat(${dataPoints}, 1fr)`
+        }}>
+          <span
+          className={
+            [
+              styles.xAxisLabel,
+              styles.xAxisLabelPreDeparture
+            ].join(" ")}><span className={styles.preDepartureBlock}>Pre-</span><span className={styles.preDepartureBlock}>departure</span></span>
+          {xAxisLabels()}
       </div>
       <hr className={styles.baseLine} />
       <div className={styles.graphSpace} ref={graphSpace}>
@@ -89,6 +119,10 @@ const MoodGraph = ({ dataPoints = 12, months, setMonths }) => {
       <div className={styles.graphNodes} style={{
           gridTemplateColumns: `repeat(${dataPoints}, 1fr)`
         }}>
+        <div className={styles.preDeparture} />
+        <div className={styles.onAssignment} style={{
+          gridColumn: `2 / ${dataPoints + 1}`
+        }} />
         {sliders}
       </div>
     </div>

@@ -5,9 +5,15 @@ import styles from './survey.module.css'
 import rangeStyles from './range.module.css'
 import MoodGraph from '../MoodGraph/MoodGraph'
 
+import { MONTH_NAMES } from '../../helpers/Constants/Constants'
+
 const Survey = () => {
-  const [duration, setDuration] = useState(6)
+  const [duration, setDuration] = useState(7)
   const [months, setMonths] = useState([0, 0, 0, 0, 0 ,0, 0, 0, 0, 0, 0, 0, 0])
+  const currentDate = new Date()
+  const currentMonth = currentDate.getMonth() - 1
+  
+  const [startMonth, setStartMonth] = useState(currentMonth)
 
   return (<section className={styles.survey}>
     <hr className={styles.divider} />
@@ -34,11 +40,24 @@ const Survey = () => {
       </Question>
       <Question
         headingText="Time on assignment">
-          <p className={styles.questionText}>How long have you been on assignment in-country?</p>
+          <p className={styles.questionText}>Which month did you arrive in-country?</p>
           <label>
-            <input className={[styles.monthsRange, rangeStyles.range].join(" ")} type="range" min="1" max="12" onChange={(e) => setDuration(e.currentTarget.value)} value={duration} />
+            <select
+              className={styles.startMonth}
+              onChange={e => { setStartMonth(e.currentTarget.selectedIndex) }}
+              value={MONTH_NAMES[startMonth]}>
+              {
+                MONTH_NAMES.map(
+                  (month, index) => <option key={index}>{month}</option>
+                )
+              }
+            </select>
+          </label>
+          <p className={styles.questionText}>How many full months have you spent in-country?</p>
+          <label>
+            <input className={[styles.monthsRange, rangeStyles.range].join(" ")} type="range" min="2" max="13" onChange={(e) => setDuration(e.currentTarget.value)} value={duration} />
             <div className={styles.monthsText}>
-              <span className={styles.monthsValue}>{duration}</span>
+              <span className={styles.monthsValue}>{duration - 1}</span>
               <span className={styles.monthsUnit}>{duration === 1? 'month' : 'months'}</span>
             </div>
           </label>
@@ -50,6 +69,7 @@ const Survey = () => {
         <MoodGraph
           dataPoints={duration}
           months={months}
+          startMonth={startMonth}
           setMonths={setMonths}
           />
       </Question>
