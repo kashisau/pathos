@@ -1,8 +1,19 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# ![Pathos](src/img/pathos-logo@2x.png)
+## _Collects mood data for volunteers in the field_
 
-## Available Scripts
+[![Netlify Status](https://api.netlify.com/api/v1/badges/66a7f8d8-8f29-4e31-a4ec-b7d84aed5385/deploy-status)](https://app.netlify.com/sites/feels/deploys)
 
-In the project directory, you can run:
+This React app has been built to collect data from former and extant volunteers in-country, allowing such data to be collated and referenced to help provide feedback about the volunteering experince. 
+
+It has been developed in preparation for an In Country Meeting (ICM) arranged by the vounteers currently in Nepal at time of writing.
+
+## How is this app built?
+There are two parts to this app, all of which is contained in this one repository. It has been built using [`create-react-app`](https://facebook.github.io/create-react-app/), and customised to be hosted and submit data to [Netlify Forms](https://www.netlify.com/products/forms/) for its free hosting and data storage features.
+
+## How do I work on this app?
+You'll need to have some familiarity with React to customise this app, and [Netlify's Forms documentation](https://docs.netlify.com/forms/setup/) is instructive in managing the data submission.
+
+To get started, clone this repository, and run the following commands to see it running locally.
 
 ### `npm start`
 
@@ -26,43 +37,3 @@ The build is minified and the filenames include the hashes.<br />
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

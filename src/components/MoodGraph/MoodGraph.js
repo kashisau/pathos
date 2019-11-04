@@ -3,7 +3,7 @@ import styles from './mood-graph.module.css'
 import Draggable from 'react-draggable'
 import Trend from '../react-trend'
 
-import { MONTH_NAMES, getMonth } from '../../helpers/Constants/Constants'
+import { getMonth } from '../../helpers/Constants/Constants'
 
 const NODE_SCALER = 116
 

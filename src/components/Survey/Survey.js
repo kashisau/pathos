@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Question from '../Question'
 
 import styles from './survey.module.css'
@@ -78,11 +78,7 @@ const Survey = () => {
         <p className={styles.questionText}>What has had the biggest <u>positive</u> effects on your mood during your assignment?<br />(Select all that apply)</p>
           <label className={styles.closedQuestion}>
             <input className={styles.closedAnswer} type="checkbox" name="moodPositives" />
-            Holidays / travel
-          </label>
-          <label className={styles.closedQuestion}>
-            <input className={styles.closedAnswer} type="checkbox" name="moodPositives" />
-            Social activities
+            Colleagues within the PO
           </label>
           <label className={styles.closedQuestion}>
             <input className={styles.closedAnswer} type="checkbox" name="moodPositives" />
@@ -90,7 +86,7 @@ const Survey = () => {
           </label>
           <label className={styles.closedQuestion}>
             <input className={styles.closedAnswer} type="checkbox" name="moodPositives" />
-            Time off work
+            Social activities outside work
           </label>
           <label className={styles.closedQuestion}>
             <input className={styles.closedAnswer} type="checkbox" name="moodPositives" />
@@ -98,7 +94,11 @@ const Survey = () => {
           </label>
           <label className={styles.closedQuestion}>
             <input className={styles.closedAnswer} type="checkbox" name="moodPositives" />
-            Colleagues within the PO
+            Time off work
+          </label>
+          <label className={styles.closedQuestion}>
+            <input className={styles.closedAnswer} type="checkbox" name="moodPositives" />
+            Holidays / travel
           </label>
           <label className={styles.closedQuestion}>
             <input className={styles.closedAnswer} type="checkbox" name="moodPositives" />
@@ -110,7 +110,11 @@ const Survey = () => {
         <p className={styles.questionText}>What has had the biggest <u>negative</u> effects on your mood during your assignment?<br />(Select all that apply)</p>
           <label className={styles.closedQuestion}>
             <input className={styles.closedAnswer} type="checkbox" name="moodNegatives" />
-            Workload
+            Too much work
+          </label>
+          <label className={styles.closedQuestion}>
+            <input className={styles.closedAnswer} type="checkbox" name="moodNegatives" />
+            Too little work
           </label>
           <label className={styles.closedQuestion}>
             <input className={styles.closedAnswer} type="checkbox" name="moodNegatives" />
@@ -134,7 +138,7 @@ const Survey = () => {
           </label>
       </Question>
       <input className={styles.submitBtn} type="submit" />
-      <p>Your specific responses will not be shared in our presentation, and this information will not be shared with anyone outside AVP.</p>
+      <p className={styles.disclaim}>Your specific responses will not be shared in our presentation, and this information will not be shared with anyone outside AVP.</p>
     </div>
   </section>)
 }

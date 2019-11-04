@@ -2,6 +2,18 @@
   color: white;
 }
 
+@media (min-width: 768px) {
+  .header {
+    max-width: 50%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .header {
+    padding: 0 10vw;
+  }
+}
+
 .welcome, .participant {
   font-size: 2rem;
   padding: 0;

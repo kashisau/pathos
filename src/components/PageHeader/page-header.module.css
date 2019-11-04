@@ -1,10 +1,17 @@
 .header {
-  background-image: url(/static/media/header-background.1556f3de.svg);
+  background-image: url(../../img/header-background.svg);
   background-size: 125%;
   background-position: bottom center;
-  height: 5.875em;
+  height: 4.5em;
 }
+
+@media (min-width: 1280px) {
+  .header {
+    padding: 0 10vw;
+  }
+}
+
 .logotype {
   height: 3em;
-  margin: 0.5em 1.75em;
+  margin: 0.5em 1em;
 }
