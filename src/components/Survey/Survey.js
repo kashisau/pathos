@@ -212,6 +212,7 @@ const Survey = () => {
           headingText="Mood"
           className={styles.moodGraphQuestion}>
           <p className={styles.questionText}>Fill out the mood graph below by sliding each point up or down to reflect your mood during that time.</p>
+          <p className={styles.questionTextEm}>Hint: Turn your mobile device sideways to make dragging each data point a little easier.</p>
           <MoodGraph
             dataPoints={duration}
             months={months}

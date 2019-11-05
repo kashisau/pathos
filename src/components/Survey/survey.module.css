@@ -39,6 +39,17 @@
 .questionText {
   font-weight: bold;
 }
+.questionTextEm {
+  font-style: italic;
+  font-size: 0.75em;
+  margin-top: -0.5em;
+}
+
+@media (min-width: 768px) {
+  .questionTextEm {
+    display: none;
+  }
+}
 
 .errorState {
   background-color: #ff00006c;
