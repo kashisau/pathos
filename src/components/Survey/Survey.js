@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Question from '../Question'
 
 import styles from './survey.module.css'
@@ -6,6 +6,7 @@ import rangeStyles from './range.module.css'
 import MoodGraph from '../MoodGraph/MoodGraph'
 
 import spinner from '../../img/oval.svg'
+import success from '../../img/icon-success.svg'
 
 import { MONTH_NAMES, MOOD_POSITIVES, MOOD_NEGATIVES } from '../../helpers/Constants/Constants'
 
@@ -47,6 +48,16 @@ const Survey = () => {
     return errorStates.length === 0
   }
 
+  // Preload these images
+  useEffect(() => {
+    const preloadImages = () => {
+      new Image().src = spinner
+      new Image().src = success
+    }
+    window.addEventListener('load', preloadImages)
+    return () => window.removeEventListener('load', preloadImages)
+  }, [])
+
   const processSubmission = e => {
     // Handle the form submission here.
     e.preventDefault()
@@ -56,7 +67,7 @@ const Survey = () => {
     setSubmitState("pending")
     
     const submissionData = encode({
-      "form-name": "contact",
+      "form-name": "pathos",
       "Assignment status": onAssignment,
       "Assignment start month": startMonth,
       "Months completed": duration,
@@ -114,9 +125,17 @@ const Survey = () => {
   const submitArea = () => {
     switch(submitState) {
       case "pending":
-        return <input disabled={submitState} className={[styles.submitBtn, styles.pending].join(" ")} type="submit" />
+        return (
+          <>
+            <input disabled={submitState} className={[styles.submitBtn, styles.pending].join(" ")} type="submit" value="Sending..."/>
+            <img className={[styles.submitIcon, styles.pendingSpinner].join(" ")} src={spinner} alt="Loading animation for pending submission" />
+          </>)
       case "submitted":
-        return <div className={styles.submitted}>Thank you for completing the survey!</div>
+        return (
+          <>
+            <input disabled={true} className={[styles.submitBtn, styles.submitted].join(" ")} type="submit" value="Submitted" />
+            <img className={[styles.submitIcon, styles.submitTick].join(" ")} src={success} alt="Submit success icon" />
+          </>)
       case "error":
         return (
           <>
@@ -254,9 +273,6 @@ const Survey = () => {
         }
         <div className={styles.submitArea}>
           {submitArea()}
-          {
-            submitState === 'pending' && <img className={styles.pendingSpinner} src={spinner} alt="Loading animation for pending submission" />
-          }
         </div>
         <p className={styles.disclaim}>Your responses to this questionnaire will be presented anonymously, and this information will only be used by AVP.</p>
       </div>

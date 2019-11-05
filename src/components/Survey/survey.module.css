@@ -165,19 +165,26 @@
   padding: 0.5em 2em;
   background: #0E3B80;
   color: white;
-  border-radius: 1em;
+  border-radius: 0.5em;
 
   margin: 0 0 1em 0;
+
+  transition: padding 800ms ease-in-out;
+}
+
+.submitIcon {
+  position: absolute;
+  right: 2em;
+  top: 1em;
+}
+
+.submitTick {
+  top: 1.25em;
 }
 
 .pending {
   background: rgb(98, 103, 110);
-}
-
-.pendingSpinner {
-  position: absolute;
-  right: 2em;
-  top: 1em;
+  padding: 0.5em 4em 0.5em 0;
 }
 
 .formError {
@@ -191,8 +198,8 @@
 }
 
 .submitted {
-  background-color: #00c95a;
-  padding: 2em 1em;
+  background-color: #31A24B;
+  padding: 0.5em 4em 0.5em 0;
 }
 
 @media (min-width: 768px) {
