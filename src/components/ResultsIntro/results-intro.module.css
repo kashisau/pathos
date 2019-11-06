@@ -1,0 +1,50 @@
+.header {
+  color: white;
+}
+
+@media (min-width: 768px) {
+  .header {
+    max-width: 50%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .header {
+    padding: 0 10vw;
+  }
+}
+
+.welcome, .participant {
+  font-size: 2rem;
+  padding: 0;
+  margin: 0;
+  line-height: 1.05;
+  letter-spacing: -0.05em;
+}
+.welcome {
+  font-weight: normal;
+  padding: 0;
+  margin: 0;
+}
+.participant {
+  display: inline-block;
+  position: relative;
+}
+.participant::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  left: 0.35em;
+  right: -0.1em;
+  bottom: 0;
+  height: 0.65rem;
+  background-color: rgba(245, 207, 94, 0.25);  
+}
+
+.info {
+  font-weight: bold;
+}
+
+.surveyLink {
+  color: white;
+}

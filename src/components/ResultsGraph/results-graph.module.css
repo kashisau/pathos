@@ -1,0 +1,161 @@
+.moodGraph {
+  background-color: #0E3B80;
+  min-height: 50vh;
+  display: grid;
+  grid-template-rows: 1fr 1px 1fr;
+  grid-template-columns: auto 1fr;
+
+  border-radius: 0.25em;
+  grid-column: 1 / 3;
+
+  position: relative;
+  user-select: none;
+
+  margin: 0 0 6em 0;
+}
+
+.yAxisLabels {
+  grid-column: 1 / 2;
+  grid-row: 1 / 4;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(5, 1fr);
+  align-items: center;
+  align-content: space-between;
+
+  border-right: 1px solid rgba(255,255,255,0.5);
+  position: relative;
+  z-index: 2;
+  user-select: none;
+}
+
+.yAxisLabel {
+  font-size: 1.25em;
+  margin: 0 0.25em;
+  text-align: center;
+  user-select: none;
+}
+
+.xAxisLabels {
+  overflow: visible;
+  grid-row: 4 / 5;
+  grid-column: 2 / 3;
+  display: grid;
+  justify-items: center;
+}
+
+.xAxisLabel {
+  transform: rotate(295deg);
+  display: inline-block;
+  height: 0;
+  overflow: visible;
+  width: 1em;
+  text-align: right;
+  position: relative;
+  top: 1.25em;
+  left: -1em;
+}
+
+.xAxisLabelPreDeparture {
+  line-height: 1;
+  transform: rotate(270deg);
+  left: -1em;
+  top: 1em;
+}
+
+.preDepartureBlock {
+  float: right;
+  display: inline-block;
+}
+
+.xAxisLabelFirstMonth {
+  font-weight: bold;
+}
+
+.baseLine {
+  grid-column: 1 / 3;
+  grid-row: 2 / 3;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0 none;
+  height: 0;
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+  position: relative;
+  z-index: 1;
+  user-select: none;
+}
+
+.graphNodes {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-row: 1 / 4;
+  grid-column: 2 / 3;
+  justify-items: center;
+
+  position: relative;
+  z-index: 2;
+  user-select: none;
+}
+
+.monthNode {
+  width: 100%;
+  max-width: 2em;
+  height: 2em;
+  display: grid;
+
+  grid-row: 1 / 2;
+
+  justify-items: center;
+  align-content: center;
+  
+  position: relative;
+  top: 7.25em;
+  user-select: none;
+
+  z-index: 3;
+}
+
+.monthNodeCircle {
+  width: 1rem;
+  height: 1rem;
+  background-color: white;
+  border-radius: 100%;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.45);
+  user-select: none;
+}
+
+.preDeparture {
+  grid-row: 1 / 3;
+  grid-column: 1 / 2;
+  background-color: #f5cf5e40;
+  width: 100%;
+  height: calc(100% + 6em);
+}
+
+.onAssignment {
+  grid-row: 2 / 3;
+  background-color: #d25ef540;
+  width: 100%;
+  height: calc(100% + 3em);
+}
+
+.graphSpace {
+  padding: 0 2.84%;
+
+  grid-row: 1 / 4;
+  grid-column: 2 / 3;
+
+  z-index: 1;
+  user-select: none;
+
+  overflow: hidden;
+
+  display: grid;
+  align-content: center;
+  justify-content: center;
+
+  grid-template-rows: 1fr;
+  grid-template-columns: repeat(13, 1fr);
+}

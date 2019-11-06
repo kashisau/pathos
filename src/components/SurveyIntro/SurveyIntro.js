@@ -1,7 +1,7 @@
 import React from 'react'
-import styles from './intro.module.css'
+import styles from './survey-intro.module.css'
 
-const Intro = ({participantName}) => 
+const Intro = () => 
   <section className={styles.header}>
     <h1 className={styles.welcome}>Mood trends</h1>
     <h2 className={styles.participant}>Volunteers in Nepal</h2>
