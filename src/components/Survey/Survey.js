@@ -18,7 +18,7 @@ import {
   MOOD_NEGATIVES
 } from '../../helpers/Constants/Constants'
 
-const Survey = () => {
+const Survey = ({ surveyComplete }) => {
 
   // Pure constants
   const currentDate = new Date()
@@ -155,6 +155,17 @@ const Survey = () => {
         return <input className={styles.submitBtn} type="submit" />
     }
   }
+
+  if (surveyComplete)
+    return (
+      <>
+        <SurveyIntro surveyComplete={surveyComplete} />
+        <hr className={pageStyles.divider} />
+        <div className={pageStyles.content}>
+          <p>See results on the <a href="/results" title="See the results">results page</a>.</p>
+        </div>
+      </>
+    )
 
   return (<>
     <SurveyIntro />
