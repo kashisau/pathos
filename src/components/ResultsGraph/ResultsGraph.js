@@ -6,9 +6,13 @@ import Trend from '../react-trend'
 
 import { TEST_DATA_MOODS } from '../../helpers/Constants/Constants'
 
-const MONTHS_DISPLAY = 13
-
-const ResultsGraph = ({ moods = [...TEST_DATA_MOODS] }) => {
+const ResultsGraph = (
+  {
+    moods = [...TEST_DATA_MOODS],
+    monthsDisplayed = 13,
+    showTrendline = true,
+    graphRef
+  }) => {
   const graphSpace = useRef()
   const [graphDimensions, setGraphDimensions] = useState({ width:0, height: 0 })
   const graphColors = palette('cb-Dark2', moods.length)
@@ -28,11 +32,11 @@ const ResultsGraph = ({ moods = [...TEST_DATA_MOODS] }) => {
     window.addEventListener('resize', updateGraphSize)
     updateGraphSize()
     return () => window.removeEventListener('resize', updateGraphSize)
-  }, [MONTHS_DISPLAY])
+  }, [monthsDisplayed])
 
   const xAxisLabels = () => {
     const labels = []
-    for (let i = 0; i < MONTHS_DISPLAY - 1; i++) {
+    for (let i = 0; i < monthsDisplayed - 1; i++) {
       labels.push(
         <span
           className={
@@ -47,7 +51,7 @@ const ResultsGraph = ({ moods = [...TEST_DATA_MOODS] }) => {
   }
 
   const averageMood = []
-  for (let i = 0; i < MONTHS_DISPLAY; i++) {
+  for (let i = 0; i < monthsDisplayed; i++) {
     let monthsIncluded = 0
     let monthsAggregate = moods.reduce((total, mood) => {
       if (i > (mood.length - 1)) return total
@@ -58,10 +62,10 @@ const ResultsGraph = ({ moods = [...TEST_DATA_MOODS] }) => {
     if (monthsIncluded) averageMood.push(monthsAggregate / monthsIncluded)
   }
 
-  const averageMoodGraphWidth = Math.round(graphDimensions.width / MONTHS_DISPLAY * averageMood.length)
+  const averageMoodGraphWidth = Math.round(graphDimensions.width / monthsDisplayed * averageMood.length)
 
   return (
-    <div className={styles.moodGraph}>
+    <div className={styles.moodGraph} ref={graphRef}>
       <div className={styles.yAxisLabels}>
         <span className={styles.yAxisLabel} role="img" aria-label="Estatic">😆</span>
         <span className={styles.yAxisLabel} role="img" aria-label="Happy">🙂</span>
@@ -70,7 +74,7 @@ const ResultsGraph = ({ moods = [...TEST_DATA_MOODS] }) => {
         <span className={styles.yAxisLabel} role="img" aria-label="Dire">😖</span>
       </div>
       <div className={styles.xAxisLabels} style={{
-          gridTemplateColumns: `repeat(${MONTHS_DISPLAY}, 1fr)`
+          gridTemplateColumns: `repeat(${monthsDisplayed}, 1fr)`
         }}>
           <span
           className={
@@ -84,7 +88,7 @@ const ResultsGraph = ({ moods = [...TEST_DATA_MOODS] }) => {
       <div className={styles.graphSpace} ref={graphSpace}>
         {moods.map(
           (mood, i) => {
-            const graphWidth = Math.round(graphDimensions.width / MONTHS_DISPLAY * mood.length)
+            const graphWidth = Math.round(graphDimensions.width / monthsDisplayed * mood.length)
             return (
               <Trend
                 smooth
@@ -92,7 +96,7 @@ const ResultsGraph = ({ moods = [...TEST_DATA_MOODS] }) => {
                 strokeWidth={4}
                 width={graphWidth}
                 height={graphDimensions.height}
-                stroke={`#${graphColors[i]}88`}
+                stroke={`#${graphColors[i]}${showTrendline? 'aa' : ''}`}
                 style={
                   {
                     gridRow: `1 / 2`,
@@ -105,7 +109,7 @@ const ResultsGraph = ({ moods = [...TEST_DATA_MOODS] }) => {
               )
             }
             )}
-        <Trend
+        {showTrendline && <Trend
           smooth
           radius={10}
           strokeWidth={12}
@@ -119,7 +123,7 @@ const ResultsGraph = ({ moods = [...TEST_DATA_MOODS] }) => {
             }
           }
           data={averageMood}
-        />
+        />}
       </div>
     </div>
   )

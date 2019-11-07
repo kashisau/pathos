@@ -1,0 +1,82 @@
+.questionText {
+  font-weight: bold;
+}
+
+.graphRange,
+.graphSettings {
+  grid-column: 1 / 3;
+  padding: 1em 0;
+}
+
+@media (min-width: 768px) {
+  .graphRange,
+  .graphSettings {
+    grid-column: unset;
+  }  
+}
+
+.monthsRange,
+.monthsText {
+  display: inline-block;
+  padding: 0;
+  vertical-align: middle;
+}
+.monthsRange {
+  width: 70%;
+  margin: 1em 0;
+}
+
+.closedAnswer {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  width: 1.75rem;
+  height: 1.75rem;
+  margin: 0.25em 0.5em 0.25em 0;
+
+  border: 2px solid #707070;
+  border-radius: 100%;
+  vertical-align: middle;
+
+  position: relative;
+}
+
+.closedAnswer:checked::before {
+  position: absolute;
+  background-color: #2A2C2B;
+  left: 0.25em;
+  right: 0.25em;
+  top: 0.25em;
+  bottom: 0.25em;
+  border-radius: 100%;
+  content: " ";
+}
+
+.closedAnswer[type="checkbox"],
+.closedAnswer[type="checkbox"]:checked::before {
+  border-radius: 0;
+}
+
+.monthsText {
+  width: 30%;
+  margin: 0;
+  line-height: 1;
+  text-align: center;
+}
+
+.monthsValue,
+.monthsUnit {
+  display: block;
+}
+
+.monthsValue {
+  font-size: 2em;
+}
+
+.fullscreenBtn {
+  width: auto;
+  display: inline-block;
+  justify-self: end;
+  grid-column: 2 / 3;
+}
