@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "run-p build:**",
+    "build": "npm run build:lambda && npm run build:app",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:app": "react-scripts build",
