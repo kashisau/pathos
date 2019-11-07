@@ -12,9 +12,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "run-p build:**",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:app": "react-scripts build",
+    "build:lambda": "netlify-lambda build src/functions"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -32,6 +34,7 @@
     ]
   },
   "devDependencies": {
+    "netlify-lambda": "^1.6.3",
     "node-fetch": "^2.6.0"
   }
 }
