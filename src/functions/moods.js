@@ -11,8 +11,10 @@ import fetch from 'node-fetch'
 
 const netlifyKey = process.env.SERVER_NETLIFY_SECRET_KEY
 const formId = process.env.SERVER_NETLIFY_FORM_ID
-
 const allowedOrigin = process.env.URL || 'http://localhost:3000'
+
+console.log("URL Environment Variable: ", process.env.URL)
+console.log("allowedOrigin: ", allowedOrigin)
 
 exports.handler = function(event, context, callback) {
   switch (event.httpMethod) {
