@@ -9,11 +9,12 @@ import fetch from 'node-fetch'
  * @author Kashi Samaraweera <kashi@kashis.com.au>
  */
 
-const NETLIFY_KEY = process.env.SERVER_NETLIFY_SECRET_KEY
-const allowedOrigin = (process.env.NODE_ENV === "production")? 'https://avifeels.kashis.com.au' : 'http://localhost:3000'
+const netlifyKey = process.env.SERVER_NETLIFY_SECRET_KEY
+const formId = process.env.SERVER_NETLIFY_FORM_ID
+
+const allowedOrigin = process.env.URL || 'http://localhost:3000'
 
 exports.handler = function(event, context, callback) {
-  console.log(process.env)
   switch (event.httpMethod) {
     case 'GET':
       getMoods(event, context)
@@ -30,25 +31,52 @@ exports.handler = function(event, context, callback) {
  * @param {*} context The Netlify Functions context object.
  */
 const getMoods = async (event, context) => {
-  return new Promise((resolve, reject) => {
-    resolve({
-        headers: {
-        'Access-Control-Allow-Headers': '*',
-        'Access-Control-Allow-Methods': 'OPTIONS,POST',
-        'Access-Control-Allow-Origin': 'http://localhost:8000',
+  return fetch(`https://api.netlify.com/api/v1/forms/${formId}/submissions`,
+    {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${netlifyKey}`
       },
-      statusCode: 200,
-      body: 'someBody',
     })
-  })
-}
+    .then(response => {
+      if (!response.ok) throw new Error(response.statusText)
+      return response.json()
+    })
+    .then(moodJson => moodJson.map(submission => {
+      const {
+        data: {
+          Mood: moodString,
+          'Months completed': monthsCompleted
+        }
+      } = submission
+      const mood = moodString.split(',')
+      const moodTruncated = mood
+        .filter((moodValue, index) => index < monthsCompleted)
+        .map(moodValue => parseFloat(moodValue))
+
+      return moodTruncated
+    }))
+    .then(moodData => {
+      return ({
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Headers': '*',
+          'Access-Control-Allow-Methods': 'GET',
+          'Access-Control-Allow-Origin': allowedOrigin,
+        },
+        statusCode: 200,
+        body: JSON.stringify(moodData),
+      })
+    })
+  }
 
 const unsupportedMethod = (event, context) => {
   return {
     headers: {
       'Access-Control-Allow-Headers': '*',
       'Access-Control-Allow-Methods': 'GET',
-      'Access-Control-Allow-Origin': 'http://localhost:8000',
+      'Access-Control-Allow-Origin': allowedOrigin,
     },
     statusCode: 400,
     body: 'someBody',
