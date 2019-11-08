@@ -10,17 +10,38 @@ import ResultsGraph from '../ResultsGraph'
 import iconFullscreen from '../../img/icon-fullscreen.svg'
 
 const DEFAULT_MONTH_DISPLAYED = 13;
+const MOOD_DATA_URL = `${process.env.URL || 'http://localhost:9000'}/.netlify/functions/moods`
 
 const Results = ({ surveyComplete }) => {
   const [monthsDisplayed, setMonthsDisplayed] = useState(DEFAULT_MONTH_DISPLAYED)
   const [showTrendline, setShowTrendline] = useState(true)
+  const [moods, setMoods] = useState([])
+
   const graphRef = useRef()
+  const isCancelled = React.useRef(false);
+
+  async function fetchData() {
+    const fetcher = await window.fetch(MOOD_DATA_URL)
+    const response = await fetcher.json()
+    if (!isCancelled.current) {
+      setMoods(response)
+    }
+  }
+
+  React.useEffect(() => {
+    fetchData()
+    return () => {
+      isCancelled.current = true;
+    };
+  }, []);
+   
 
   return (
     <>
       <ResultsIntro surveyComplete={surveyComplete} />
       <hr className={pageStyles.divider} />
       <div className={[pageStyles.content, styles.results].join(" ")} ref={graphRef}>
+        <h2 className={pageStyles.pageHeading}>Volunteer mood over time (months)</h2>
         <div className={styles.graphRange}>
           <p className={styles.questionText}>Graph range</p>
           <label>
@@ -49,6 +70,7 @@ const Results = ({ surveyComplete }) => {
           onClick={() => graphRef.current.requestFullscreen()}
           aria-label="Show full-screen graph"><img src={iconFullscreen} alt="fullscreen icon" aria-label="Fullscreen" /></button> */}
         <ResultsGraph
+          moods={moods}
           monthsDisplayed={monthsDisplayed}
           showTrendline={showTrendline} /> 
       </div>

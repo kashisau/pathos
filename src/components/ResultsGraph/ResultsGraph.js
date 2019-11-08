@@ -4,6 +4,8 @@ import palette from 'google-palette'
 import styles from './results-graph.module.css'
 import Trend from '../react-trend'
 
+import loadingGraphIcon from '../../img/oval.svg'
+
 import { TEST_DATA_MOODS } from '../../helpers/Constants/Constants'
 
 const ResultsGraph = (
@@ -15,15 +17,15 @@ const ResultsGraph = (
   }) => {
   const graphSpace = useRef()
   const [graphDimensions, setGraphDimensions] = useState({ width:0, height: 0 })
+
   const graphColors = palette('cb-Dark2', moods.length)
 
   const updateGraphSize = () => {
     if (graphSpace.current) {
       const dimensions = {
-        width: graphSpace.current.offsetWidth - 48,
+        width: graphSpace.current.offsetWidth * .9432,
         height: graphSpace.current.offsetHeight
       }
-
       setGraphDimensions(dimensions)
     }
   }
@@ -56,7 +58,6 @@ const ResultsGraph = (
     let monthsAggregate = moods.reduce((total, mood) => {
       if (i > (mood.length - 1)) return total
       monthsIncluded++
-      if ( ! mood[i]) console.log(`Trtying to add element number ${i} from `, mood)
       return total + mood[i]
     }, 0)
     if (monthsIncluded) averageMood.push(monthsAggregate / monthsIncluded)
@@ -86,7 +87,13 @@ const ResultsGraph = (
       </div>
       <hr className={styles.baseLine} />
       <div className={styles.graphSpace} ref={graphSpace}>
-        {moods.map(
+        {moods.length === 0 && 
+          <img
+            className={styles.loadingGraphIcon}
+            src={loadingGraphIcon}
+            alt="Loading graph data"
+            aria-label="Loading graph data" />}
+        {moods.length > 0 && moods.map(
           (mood, i) => {
             const graphWidth = Math.round(graphDimensions.width / monthsDisplayed * mood.length)
             return (
@@ -109,7 +116,7 @@ const ResultsGraph = (
               )
             }
             )}
-        {showTrendline && <Trend
+        {moods.length > 0 && showTrendline && <Trend
           smooth
           radius={10}
           strokeWidth={12}

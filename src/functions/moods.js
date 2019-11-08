@@ -78,7 +78,7 @@ const unsupportedMethod = (event, context) => {
       'Access-Control-Allow-Methods': 'GET',
       'Access-Control-Allow-Origin': allowedOrigin,
     },
-    statusCode: 400,
+    statusCode: 422,
     body: 'someBody',
   }
 }

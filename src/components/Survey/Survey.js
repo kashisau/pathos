@@ -162,7 +162,8 @@ const Survey = ({ surveyComplete }) => {
         <SurveyIntro surveyComplete={surveyComplete} />
         <hr className={pageStyles.divider} />
         <div className={pageStyles.content}>
-          <p>See results on the <a href="/results" title="See the results">results page</a>.</p>
+        <h2 className={pageStyles.pageHeading}>Thank you for completing the survey</h2>
+        <p className={pageStyles.bodyCentre}>The results will be presented at Chitwan during the November in country meeting.</p>
         </div>
       </>
     )
