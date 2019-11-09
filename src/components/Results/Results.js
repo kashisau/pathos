@@ -10,7 +10,7 @@ import ResultsGraph from '../ResultsGraph'
 import iconFullscreen from '../../img/icon-fullscreen.svg'
 
 const DEFAULT_MONTH_DISPLAYED = 13;
-const MOOD_DATA_URL = `${process.env.URL || 'http://localhost:9000'}/.netlify/functions/moods`
+const MOOD_DATA_URL = `${process.env.NODE_ENV === 'production'? '' : 'http://localhost:9000'}/.netlify/functions/moods`
 
 const Results = ({ surveyComplete }) => {
   const [monthsDisplayed, setMonthsDisplayed] = useState(DEFAULT_MONTH_DISPLAYED)
