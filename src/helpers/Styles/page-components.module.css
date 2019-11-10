@@ -12,9 +12,13 @@
 }
 .content {
   background-color: #fcfcfc;
-  margin: -3rem -1rem 0;
+  margin: -3rem -1rem 4rem;
   padding: 0 1rem;
   display: grid;
+}
+
+.bodyCentre {
+  text-align: center;
 }
 
 .pageHeading {
@@ -29,7 +33,6 @@
   }
   .bodyCentre {
     grid-column: 1 / 3;
-    text-align: center;
     margin-bottom: 10rem;
   }
   .pageHeading {

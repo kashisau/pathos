@@ -89,8 +89,17 @@ const Survey = ({ surveyComplete }) => {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: submissionData
     })
-    .then(response => setSubmitState(response.ok? 'submitted' : 'error'))
-    .then(() => window.localStorage.setItem('surveyComplete', true))
+    .then(response => {
+      if (!response.ok) throw new Error('Error submitting')
+      setSubmitState('submitted')
+      return response.json()
+    })
+    .then(response => {
+      console.log(response)
+      window.localStorage.setItem('surveyMoods', months)
+      window.localStorage.setItem('surveyComplete', true)
+      }
+    )
     .catch(error => setSubmitState('error'))
   }
 
