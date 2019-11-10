@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
+import { v4 as uuid } from 'uuid'
 
 import SurveyIntro from '../SurveyIntro'
 import Question from '../Question'
+import ResultsGraph from '../ResultsGraph'
 
 import pageStyles from '../../helpers/Styles/page-components.module.css'
 import styles from './survey.module.css'
@@ -18,7 +20,11 @@ import {
   MOOD_NEGATIVES
 } from '../../helpers/Constants/Constants'
 
-const Survey = ({ surveyComplete }) => {
+const Survey = ({ 
+  surveyComplete,
+  surveyMood,
+  surveySubmissionUuid
+ }) => {
 
   // Pure constants
   const currentDate = new Date()
@@ -28,7 +34,7 @@ const Survey = ({ surveyComplete }) => {
   const [onAssignment, setOnAssignment] = useState()
   const [startMonth, setStartMonth] = useState(currentMonth)
   const [duration, setDuration] = useState(7)
-  const [months, setMonths] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+  const [months, setMonths] = useState(surveyMood || [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
   const [moodPositives, setPositives] = useState([])
   const [moodNegatives, setNegatives] = useState([])
 
@@ -73,8 +79,9 @@ const Survey = ({ surveyComplete }) => {
     if ( ! validate()) return
     
     setSubmitState("pending")
-    
+    const submissionUuid = uuid()
     const submissionData = encode({
+      "surveySubmissionUuid": submissionUuid,
       "form-name": "pathos",
       "Assignment status": onAssignment,
       "Assignment start month": startMonth,
@@ -90,13 +97,16 @@ const Survey = ({ surveyComplete }) => {
       body: submissionData
     })
     .then(response => {
-      if (!response.ok) throw new Error('Error submitting')
+      // if (!response.ok) throw new Error('Error submitting')
       setSubmitState('submitted')
-      return response.json()
     })
-    .then(response => {
-      console.log(response)
-      window.localStorage.setItem('surveyMoods', months)
+    .then(_ => {
+      window.localStorage.setItem('surveySubmissionUuid', submissionUuid)
+      window.localStorage.setItem(
+        'surveyMoods',
+        months.filter(
+          (_, monthIndex) => monthIndex < duration).join(",")
+        )
       window.localStorage.setItem('surveyComplete', true)
       }
     )
@@ -165,17 +175,22 @@ const Survey = ({ surveyComplete }) => {
     }
   }
 
-  if (surveyComplete)
+  if (surveyComplete) {
     return (
       <>
         <SurveyIntro surveyComplete={surveyComplete} />
         <hr className={pageStyles.divider} />
         <div className={pageStyles.content}>
         <h2 className={pageStyles.pageHeading}>Thank you for completing the survey</h2>
+        <ResultsGraph
+          moods={[months]}
+          monthsDisplayed={months.length}
+          showTrendline={false} /> 
         <p className={pageStyles.bodyCentre}>The results will be presented at Chitwan during the November in country meeting.</p>
         </div>
       </>
     )
+  }
 
   return (<>
     <SurveyIntro />
