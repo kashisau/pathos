@@ -82,6 +82,7 @@ const ResultsGraph = (
       </div>
       <hr className={styles.baseLine} />
       <div className={styles.graphSpace} ref={graphSpace}>
+        <div className={[styles.preDeparture, styles.preDeparturePadded].join(" ")} />
         {moodSubmissions.length === 0 && 
           <img
             className={styles.loadingGraphIcon}

@@ -3,7 +3,6 @@ import { v4 as uuid } from 'uuid'
 
 import SurveyIntro from '../SurveyIntro'
 import Question from '../Question'
-import ResultsGraph from '../ResultsGraph'
 
 import pageStyles from '../../helpers/Styles/page-components.module.css'
 import styles from './survey.module.css'
@@ -19,8 +18,6 @@ import {
   MOOD_POSITIVES,
   MOOD_NEGATIVES
 } from '../../helpers/Constants/Constants'
-
-const MOOD_DATA_URL = `${process.env.NODE_ENV === 'production'? '' : 'http://localhost:9000'}/.netlify/functions/moods`
 
 const Survey = () => {
   // Pure constants
