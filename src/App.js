@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './layouts/Layout'
 import Survey from './components/Survey'
+import SurveySubmitted from './components/SurveySubmitted'
 import Results from './components/Results'
 import { BrowserRouter, Route } from 'react-router-dom'
 
@@ -19,17 +20,25 @@ const App = () => {
                     .map(mood => parseFloat(mood))
     setSurveyMood(months)
   }, [])
+
   return (
     <BrowserRouter>
       <Layout>
         <Route path="/" component={
           (props) => 
-            <Survey
-              {...props}
-              surveyComplete={surveyComplete}
-              surveyMood={surveyMood}
-              surveySubmissionUuid={surveySubmissionUuid} />
-          } exact/>
+            !surveyComplete?
+              <Survey
+                {...props}
+                surveyComplete={surveyComplete}
+                surveyMood={surveyMood}
+                surveySubmissionUuid={surveySubmissionUuid} />
+              :
+              <SurveySubmitted
+                {...props}
+                surveyComplete={surveyComplete}
+                surveyMood={surveyMood}
+                surveySubmissionUuid={surveySubmissionUuid} />
+            } exact/>
         <Route path="/results" component={
           (props) =>
             <Results

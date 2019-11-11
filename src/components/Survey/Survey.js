@@ -20,12 +20,9 @@ import {
   MOOD_NEGATIVES
 } from '../../helpers/Constants/Constants'
 
-const Survey = ({ 
-  surveyComplete,
-  surveyMood,
-  surveySubmissionUuid
- }) => {
+const MOOD_DATA_URL = `${process.env.NODE_ENV === 'production'? '' : 'http://localhost:9000'}/.netlify/functions/moods`
 
+const Survey = () => {
   // Pure constants
   const currentDate = new Date()
   const currentMonth = currentDate.getMonth() - 1
@@ -34,7 +31,7 @@ const Survey = ({
   const [onAssignment, setOnAssignment] = useState()
   const [startMonth, setStartMonth] = useState(currentMonth)
   const [duration, setDuration] = useState(7)
-  const [months, setMonths] = useState(surveyMood || [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+  const [months, setMonths] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
   const [moodPositives, setPositives] = useState([])
   const [moodNegatives, setNegatives] = useState([])
 
@@ -82,13 +79,13 @@ const Survey = ({
     const newSubmissionUuid = uuid()
     const submissionData = encode({
       "form-name": "pathos",
-      "Survey Submission Uuid": newSubmissionUuid,
       "Assignment status": onAssignment,
       "Assignment start month": startMonth,
       "Months completed": duration,
       "Mood": months.join(","),
       "Mood positives": moodPositives.join(","),
-      "Mood negatives": moodNegatives.join(",")
+      "Mood negatives": moodNegatives.join(","),
+      "Survey Submission Uuid": newSubmissionUuid
     })
     
     fetch("/submit", {
@@ -175,23 +172,6 @@ const Survey = ({
     }
   }
 
-  if (surveyComplete) {
-    return (
-      <>
-        <SurveyIntro surveyComplete={surveyComplete} />
-        <hr className={pageStyles.divider} />
-        <div className={pageStyles.content}>
-        <h2 className={pageStyles.pageHeading}>Thank you for completing the survey</h2>
-        <ResultsGraph
-          moods={[months]}
-          monthsDisplayed={months.length}
-          showTrendline={false} /> 
-        <p className={pageStyles.bodyCentre}>The results will be presented at Chitwan during the November in country meeting.</p>
-        </div>
-      </>
-    )
-  }
-
   return (<>
     <SurveyIntro />
     <section className={styles.survey}>
@@ -204,7 +184,6 @@ const Survey = ({
         data-netlify="true"
         data-netlify-honeypot="bot-field"
         onSubmit={e => processSubmission(e)}>
-        <input type="hidden" name="Survey Submission Uuid" />
         <div className={pageStyles.content}>
           <Question
             headingText="Let's begin">
@@ -317,6 +296,7 @@ const Survey = ({
                   errorStates.includes('moodNegatives')? styles.errorStateActive : undefined
                 ].join(" ")}>Please choose at least one negative contributor to your mood from the list above</div>
           </Question>
+          <input type="hidden" name="Survey Submission Uuid" />
           {
             errorStates.length > 0 && <p className={styles.formError}>There were missing questionnaire responses above. Please check that you have answered all the questions above and try again.</p>
           }

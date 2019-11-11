@@ -15,7 +15,7 @@ const MOOD_DATA_URL = `${process.env.NODE_ENV === 'production'? '' : 'http://loc
 const Results = ({ surveyComplete }) => {
   const [monthsDisplayed, setMonthsDisplayed] = useState(DEFAULT_MONTH_DISPLAYED)
   const [showTrendline, setShowTrendline] = useState(true)
-  const [moods, setMoods] = useState([])
+  const [moodSubmissions, setMoodSubmissions] = useState([])
 
   const graphRef = useRef()
   const isCancelled = React.useRef(false);
@@ -24,7 +24,7 @@ const Results = ({ surveyComplete }) => {
     const fetcher = await window.fetch(MOOD_DATA_URL)
     const response = await fetcher.json()
     if (!isCancelled.current) {
-      setMoods(response)
+      setMoodSubmissions(response)
     }
   }
 
@@ -70,7 +70,7 @@ const Results = ({ surveyComplete }) => {
           onClick={() => graphRef.current.requestFullscreen()}
           aria-label="Show full-screen graph"><img src={iconFullscreen} alt="fullscreen icon" aria-label="Fullscreen" /></button> */}
         <ResultsGraph
-          moods={moods}
+          moodSubmissions={moodSubmissions}
           monthsDisplayed={monthsDisplayed}
           showTrendline={showTrendline} /> 
       </div>

@@ -1,24 +1,19 @@
 import React,{ useRef, useEffect, useState } from 'react'
-import palette from 'google-palette'
 
 import styles from './results-graph.module.css'
 import Trend from '../react-trend'
 
 import loadingGraphIcon from '../../img/oval.svg'
 
-import { TEST_DATA_MOODS } from '../../helpers/Constants/Constants'
-
 const ResultsGraph = (
   {
-    moods = [...TEST_DATA_MOODS],
+    moodSubmissions,
     monthsDisplayed = 13,
     showTrendline = true,
     graphRef
   }) => {
   const graphSpace = useRef()
   const [graphDimensions, setGraphDimensions] = useState({ width:0, height: 0 })
-
-  const graphColors = palette('cb-Dark2', moods.length)
 
   const updateGraphSize = () => {
     if (graphSpace.current) {
@@ -55,10 +50,10 @@ const ResultsGraph = (
   const averageMood = []
   for (let i = 0; i < monthsDisplayed; i++) {
     let monthsIncluded = 0
-    let monthsAggregate = moods.reduce((total, mood) => {
-      if (i > (mood.length - 1)) return total
+    let monthsAggregate = moodSubmissions.reduce((total, moodSubmission) => {
+      if (i > (moodSubmission.mood.length - 1)) return total
       monthsIncluded++
-      return total + mood[i]
+      return total + moodSubmission.mood[i]
     }, 0)
     if (monthsIncluded) averageMood.push(monthsAggregate / monthsIncluded)
   }
@@ -87,15 +82,15 @@ const ResultsGraph = (
       </div>
       <hr className={styles.baseLine} />
       <div className={styles.graphSpace} ref={graphSpace}>
-        {moods.length === 0 && 
+        {moodSubmissions.length === 0 && 
           <img
             className={styles.loadingGraphIcon}
             src={loadingGraphIcon}
             alt="Loading graph data"
             aria-label="Loading graph data" />}
-        {moods.length > 0 && moods.map(
-          (mood, i) => {
-            const graphWidth = Math.round(graphDimensions.width / monthsDisplayed * mood.length)
+        {moodSubmissions.length > 0 && moodSubmissions.map(
+          (moodSubmission, i) => {
+            const graphWidth = Math.round(graphDimensions.width / monthsDisplayed * moodSubmission.mood.length)
             return (
               <Trend
                 smooth
@@ -103,20 +98,20 @@ const ResultsGraph = (
                 strokeWidth={4}
                 width={graphWidth}
                 height={graphDimensions.height}
-                stroke={`#${graphColors[i]}${showTrendline? 'aa' : ''}`}
+                stroke={`#${moodSubmission.colour}${showTrendline? 'aa' : ''}`}
                 style={
                   {
                     gridRow: `1 / 2`,
-                    gridColumn: `1 / ${mood.length}`
+                    gridColumn: `1 / ${moodSubmission.mood.length}`
                   }
                 }
-                data={mood}
+                data={moodSubmission.mood}
                 key={i}
               />
               )
             }
             )}
-        {moods.length > 0 && showTrendline && <Trend
+        {moodSubmissions.length > 0 && showTrendline && <Trend
           smooth
           radius={10}
           strokeWidth={12}
