@@ -79,10 +79,10 @@ const Survey = ({
     if ( ! validate()) return
     
     setSubmitState("pending")
-    const submissionUuid = uuid()
+    const newSubmissionUuid = uuid()
     const submissionData = encode({
-      "surveySubmissionUuid": submissionUuid,
       "form-name": "pathos",
+      "Survey Submission Uuid": newSubmissionUuid,
       "Assignment status": onAssignment,
       "Assignment start month": startMonth,
       "Months completed": duration,
@@ -97,11 +97,11 @@ const Survey = ({
       body: submissionData
     })
     .then(response => {
-      // if (!response.ok) throw new Error('Error submitting')
+      if (!response.ok) throw new Error('Error submitting')
       setSubmitState('submitted')
     })
     .then(_ => {
-      window.localStorage.setItem('surveySubmissionUuid', submissionUuid)
+      window.localStorage.setItem('surveySubmissionUuid', newSubmissionUuid)
       window.localStorage.setItem(
         'surveyMoods',
         months.filter(
@@ -204,6 +204,7 @@ const Survey = ({
         data-netlify="true"
         data-netlify-honeypot="bot-field"
         onSubmit={e => processSubmission(e)}>
+        <input type="hidden" name="Survey Submission Uuid" />
         <div className={pageStyles.content}>
           <Question
             headingText="Let's begin">
