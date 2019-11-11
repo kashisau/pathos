@@ -36,8 +36,7 @@ const Survey = ({ surveySubmissionUuid }) => {
       <SurveyIntro surveyComplete={true} />
       <hr className={pageStyles.divider} />
       <div className={pageStyles.content}>
-      <p className={pageStyles.bodyCentre}>Your submission is shown below. The colour of your graph below matches the colours of the graph presented in the aggregate results shown in the meeting.</p>
-      <h2 className={pageStyles.pageHeading}>Volunteer mood over time (months)</h2>
+      <h2 className={pageStyles.pageHeading}>Your mood over time (months)</h2>
       {submissionData && <ResultsGraph
         moodSubmissions={submissionData}
         monthsDisplayed={13}
