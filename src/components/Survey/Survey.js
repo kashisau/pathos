@@ -28,7 +28,7 @@ const Survey = () => {
   const [onAssignment, setOnAssignment] = useState()
   const [startMonth, setStartMonth] = useState(currentMonth)
   const [duration, setDuration] = useState(7)
-  const [months, setMonths] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+  const [months, setMonths] = useState([0,0,0,0,0,0,0,0,0,0,0,0,0])
   const [moodPositives, setPositives] = useState([])
   const [moodNegatives, setNegatives] = useState([])
 

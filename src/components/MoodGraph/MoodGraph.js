@@ -14,15 +14,21 @@ const MoodGraph = ({ dataPoints = 12, months, setMonths, startMonth, submitState
                       useRef(), useRef(), useRef(), useRef(),
                       useRef(), useRef(), useRef(), useRef(), useRef()]
 
+  const preventScrollRef = useRef(e => e.preventDefault())
+
   const [graphDimensions, setGraphDimensions] = useState({ width:0, height: 0 })
 
   const updateMonths = (nativeEvent, draggableData) => {
+    nativeEvent.preventDefault()
     const month = parseInt(draggableData.node.dataset.month, 10)
     const monthValue = (parseInt(draggableData.y, 10) * -1) / NODE_SCALER
     const newMonths = [...months]
     newMonths[month] = monthValue
     setMonths(newMonths)
   }
+
+  const addPreventScroll = () => document.addEventListener("touchmove", preventScrollRef.current, { passive: false })
+  const removePreventScroll = () => document.removeEventListener("touchmove", preventScrollRef.current)
 
   const updateGraphSize = () => {
     if (graphSpace.current) {
@@ -54,6 +60,8 @@ const MoodGraph = ({ dataPoints = 12, months, setMonths, startMonth, submitState
     sliders.push(<Draggable
         axis="y"
         bounds="parent"
+        onStart={addPreventScroll}
+        onStop={removePreventScroll}
         onDrag={updateMonths}
         defaultPosition={ {x: 0, y: months[i]*-NODE_SCALER} }
         disabled={submitState}
