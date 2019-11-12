@@ -8,21 +8,23 @@ export const getMonth = (index, offset = 0) => {
 }
 
 export const MOOD_POSITIVES = [
-  "Colleagues within the PO",
   "Assignment progress",
   "Social activities outside work",
+  "Engaging with the local culture",
+  "Colleagues within the PO",
   "Establishing a routine",
-  "Time off work",
   "Holidays / travel",
+  "Time off work",
   "Other"
 ]
 
 export const MOOD_NEGATIVES = [
-  "Too much work",
-  "Too little work",
   "Progress (or lack thereof)",
   "Isolation",
+  "Feeling apart from the local culture",
   "Colleagues within the PO",
+  "Too much work",
+  "Too little work",
   "Unrealistic assignment goals",
   "Other"
 ]
