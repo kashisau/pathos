@@ -136,7 +136,14 @@
 
 .preDeparturePadded {
   margin-left: -2rem;
-  margin-right: 1.5rem;
+  margin-right: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .preDeparturePadded {
+    margin-left: -2rem;
+    margin-right: 1.5rem;
+  }
 }
 
 .onAssignment {

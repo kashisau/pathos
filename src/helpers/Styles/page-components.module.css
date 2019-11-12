@@ -22,6 +22,30 @@
   grid-column: 1 / 3;
 }
 
+.serverError {
+  text-align: center;
+  grid-column: 1 / 3;
+
+  background-color: rgb(255, 173, 134);
+
+  padding: 1rem;
+}
+
+.btn {
+  -webkit-appearance: none;
+  width: 100%;
+  font-size: 2em;
+  font-weight: bold;
+  padding: 0.5em 2em;
+  background: #0E3B80;
+  color: white;
+  border-radius: 0.5em;
+
+  margin: 0 0 1em 0;
+
+  transition: padding 800ms ease-in-out;
+}
+
 .pageHeading {
   text-align: center;
   grid-column: 1 / 3;

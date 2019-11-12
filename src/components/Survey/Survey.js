@@ -209,7 +209,7 @@ const Survey = () => {
           </Question>
           <Question
             headingText="Time on assignment">
-              <p className={styles.questionText}>Which month did you arrive in-country?</p>
+              <p className={styles.questionText}>In which month did you arrive in-country?</p>
               <label>
                 <select
                   className={styles.startMonth}
@@ -223,7 +223,7 @@ const Survey = () => {
                   }
                 </select>
               </label>
-              <p className={styles.questionText}>How many months have you spent in-country?</p>
+              <p className={styles.questionText}>How long have you volunteered in-country?</p>
               <label>
                 <input disabled={submitState} className={[styles.monthsRange, rangeStyles.range].join(" ")} type="range" min="2" max="13" onChange={(e) => setDuration(e.currentTarget.value)} value={duration} />
                 <div className={styles.monthsText}>
