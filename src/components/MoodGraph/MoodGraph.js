@@ -9,14 +9,21 @@ const NODE_SCALER = 116
 
 const MoodGraph = ({ dataPoints = 12, months, setMonths, startMonth, submitState }) => {
   const sliders = []
+  
+  const isDraggingRef = useRef(false)
   const graphSpace = useRef()
   const sliderRefs = [useRef(), useRef(), useRef(), useRef(),
                       useRef(), useRef(), useRef(), useRef(),
                       useRef(), useRef(), useRef(), useRef(), useRef()]
 
-  const preventScrollRef = useRef(e => e.preventDefault())
-
   const [graphDimensions, setGraphDimensions] = useState({ width:0, height: 0 })
+
+  // Cancels page scrolling if the user is dragging a slider.
+  const preventScrollRef = useRef(e => {
+    if (isDraggingRef.current) {
+      e.preventDefault()
+    } 
+  })
 
   const updateMonths = (nativeEvent, draggableData) => {
     nativeEvent.preventDefault()
@@ -27,8 +34,27 @@ const MoodGraph = ({ dataPoints = 12, months, setMonths, startMonth, submitState
     setMonths(newMonths)
   }
 
-  const addPreventScroll = () => document.addEventListener("touchmove", preventScrollRef.current, { passive: false })
-  const removePreventScroll = () => document.removeEventListener("touchmove", preventScrollRef.current)
+  // Intervenes page scrolling and cancels the event so that the page doesn't
+  // scroll whilst the user is trying to use the sliders.
+  const addPreventScroll = () => {
+    document.body.addEventListener("touchmove", preventScrollRef.current, { passive: false, capture: true })
+    document.body.addEventListener("touchstart", preventScrollRef.current, { passive: false, capture: true })
+  }
+  const removePreventScroll = () => {
+    document.body.removeEventListener("touchmove", preventScrollRef.current, { passive: false, capture: true })
+    document.body.removeEventListener("touchstart", preventScrollRef.current, { passive: false, capture: true })
+  }
+
+  // Add on page load, as well as an update to the number of data points
+  useEffect(() => {
+    window.addEventListener('resize', updateGraphSize)
+    addPreventScroll()
+    updateGraphSize()
+    return () => {
+      window.removeEventListener('resize', updateGraphSize)
+      removePreventScroll()
+    }
+  }, [dataPoints])
 
   const updateGraphSize = () => {
     if (graphSpace.current) {
@@ -50,18 +76,12 @@ const MoodGraph = ({ dataPoints = 12, months, setMonths, startMonth, submitState
     }
   }
 
-  useEffect(() => {
-    window.addEventListener('resize', updateGraphSize)
-    updateGraphSize()
-    return () => window.removeEventListener('resize', updateGraphSize)
-  }, [dataPoints])
-
   for (let i=0; i < dataPoints; i++) {
     sliders.push(<Draggable
         axis="y"
         bounds="parent"
-        onStart={addPreventScroll}
-        onStop={removePreventScroll}
+        onStart={_ => isDraggingRef.current = true}
+        onStop={_ => isDraggingRef.current = false}
         onDrag={updateMonths}
         defaultPosition={ {x: 0, y: months[i]*-NODE_SCALER} }
         disabled={submitState}
@@ -94,7 +114,10 @@ const MoodGraph = ({ dataPoints = 12, months, setMonths, startMonth, submitState
                       .filter((value, month) => month < dataPoints)
 
   return (
-    <div className={styles.moodGraph}>
+    <div className={styles.moodGraph}
+      // onTouchStartCapture={_ => isDraggingRef.current = true}
+      // onTouchEnd={_ => isDraggingRef.current = false}
+    >
       <div className={styles.yAxisLabels}>
         <span className={styles.yAxisLabel} role="img" aria-label="Estatic">😆</span>
         <span className={styles.yAxisLabel} role="img" aria-label="Happy">🙂</span>
@@ -114,7 +137,9 @@ const MoodGraph = ({ dataPoints = 12, months, setMonths, startMonth, submitState
           {xAxisLabels()}
       </div>
       <hr className={styles.baseLine} />
-      <div className={styles.graphSpace} ref={graphSpace}>
+      <div
+        className={styles.graphSpace}
+        ref={graphSpace}>
         <Trend
           smooth
           radius={20}
@@ -125,7 +150,9 @@ const MoodGraph = ({ dataPoints = 12, months, setMonths, startMonth, submitState
           strokeOpacity={0.5}
           data={graphData} />
       </div>
-      <div className={styles.graphNodes} style={{
+      <div
+        className={styles.graphNodes}
+        style={{
           gridTemplateColumns: `repeat(${dataPoints}, 1fr)`
         }}>
         <div className={styles.preDeparture} />
