@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Layout from './layouts/Layout'
 import Survey from './components/Survey'
+import Tables from './components/Tables'
 import SurveySubmitted from './components/SurveySubmitted'
 import Results from './components/Results'
 import { BrowserRouter, Route } from 'react-router-dom'
@@ -47,6 +48,7 @@ const App = () => {
             surveyMood={surveyMood}
             surveySubmissionUuid={surveySubmissionUuid} />
           } exact/>
+        <Route path="/tables" component={Tables} exact/>
       </Layout>
     </BrowserRouter>
   )
